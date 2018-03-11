@@ -12,6 +12,9 @@
     <module>ch02/di-config</module>
     <module>ch02/di-javaconfig</module>
     <module>ch02/di-testjavaconfig</module>
+    <module>ch03/aop-annotation</module>
+    <module>ch03/aop-config</module>
+    <module>ch03/aop-javaconfig</module>
   </modules>
 </project>
 
