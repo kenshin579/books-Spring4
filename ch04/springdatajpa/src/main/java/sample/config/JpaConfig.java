@@ -1,9 +1,8 @@
 package sample.config;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
@@ -17,12 +16,11 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan("sample.jpa.dataaccess")
+@EnableJpaRepositories(basePackages = "sample.springdatajpa.business.service")
 public class JpaConfig {
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
-
         HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
         adapter.setShowSql(true);
         adapter.setDatabase(Database.HSQL);
@@ -35,7 +33,7 @@ public class JpaConfig {
         emfb.setJpaVendorAdapter(adapter);
         emfb.setJpaProperties(props);
         emfb.setDataSource(dataSource);
-        emfb.setPackagesToScan("sample.jpa.business.domain");
+        emfb.setPackagesToScan("sample.springdatajpa.business.domain");
 
         return emfb;
     }
@@ -44,11 +42,5 @@ public class JpaConfig {
     public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
         return new JpaTransactionManager(emf);
     }
-
-    @Bean
-    public PersistenceExceptionTranslationPostProcessor exceptionTranslator() {
-        return new PersistenceExceptionTranslationPostProcessor();
-    }
-
 
 }

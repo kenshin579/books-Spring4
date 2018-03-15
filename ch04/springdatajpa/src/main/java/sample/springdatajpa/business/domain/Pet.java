@@ -1,4 +1,4 @@
-package sample.jpa.business.domain;
+package sample.springdatajpa.business.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
