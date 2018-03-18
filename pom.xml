@@ -18,5 +18,6 @@
         <module>ch04/springdatajpa</module>
         <module>ch04/springjdbc</module>
         <module>ch05/transaction</module>
+        <module>ch06/mvc</module>
     </modules>
 </project>
