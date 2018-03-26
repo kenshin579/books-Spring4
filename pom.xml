@@ -19,5 +19,6 @@
         <module>ch04/springjdbc</module>
         <module>ch05/transaction</module>
         <module>ch06/mvc</module>
+        <module>ch07/security</module>
     </modules>
 </project>
