@@ -23,5 +23,6 @@
         <module>ch08/hibernate</module>
         <module>ch08/jpa</module>
         <module>ch08/mybatis</module>
+        <module>ch09/cache</module>
     </modules>
 </project>
