@@ -20,5 +20,8 @@
         <module>ch05/transaction</module>
         <module>ch06/mvc</module>
         <module>ch07/security</module>
+        <module>ch08/hibernate</module>
+        <module>ch08/jpa</module>
+        <module>ch08/mybatis</module>
     </modules>
 </project>
