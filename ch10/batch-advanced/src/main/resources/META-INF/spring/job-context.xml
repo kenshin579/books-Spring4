@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:batch="http://www.springframework.org/schema/batch"
+       xsi:schemaLocation="
+	http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--순차 실행-->
+    <batch:job id="job1">
+        <batch:step id="step1" next="step2">
+            <batch:tasklet>
+                <batch:chunk reader="productItemReader" writer="productItemWriter"
+                             commit-interval="1"/>
+            </batch:tasklet>
+        </batch:step>
+        <batch:step id="step2">
+            <batch:tasklet>
+                <batch:chunk reader="memberItemReader" writer="memberItemWriter"
+                             commit-interval="1"/>
+            </batch:tasklet>
+        </batch:step>
+    </batch:job>
+
+    <!--분기 처리-->
+    <!--<batch:job id="job1">-->
+        <!--<batch:step id="step1">-->
+            <!--<batch:tasklet>-->
+                <!--<batch:chunk reader="productItemReader" writer="productItemWriter"-->
+                             <!--commit-interval="1"/>-->
+            <!--</batch:tasklet>-->
+            <!--<batch:end on="COMPLTED"/>-->
+            <!--<batch:next on="*" to="step2"/>-->
+        <!--</batch:step>-->
+        <!--<batch:step id="step2">-->
+            <!--<batch:tasklet>-->
+                <!--<batch:chunk reader="memberItemReader" writer="memberItemWriter"-->
+                             <!--commit-interval="1"/>-->
+            <!--</batch:tasklet>-->
+        <!--</batch:step>-->
+    <!--</batch:job>-->
+
+    <!--&lt;!&ndash;병행(split) 처리&ndash;&gt;-->
+    <!--<batch:job id="job1">-->
+        <!--<batch:split id="split1" task-executor="taskExecutor">-->
+            <!--<batch:flow>-->
+                <!--<batch:step id="step1">-->
+                    <!--<batch:tasklet>-->
+                        <!--<batch:chunk reader="productItemReader" writer="productItemWriter"-->
+                                     <!--commit-interval="1"/>-->
+                    <!--</batch:tasklet>-->
+                <!--</batch:step>-->
+            <!--</batch:flow>-->
+            <!--<batch:flow>-->
+                <!--<batch:step id="step2">-->
+                    <!--<batch:tasklet>-->
+                        <!--<batch:chunk reader="memberItemReader" writer="memberItemWriter"-->
+                                     <!--commit-interval="1"/>-->
+                    <!--</batch:tasklet>-->
+                <!--</batch:step>-->
+            <!--</batch:flow>-->
+        <!--</batch:split>-->
+    <!--</batch:job>-->
+
+    <!--&lt;!&ndash;병행(partition) 처리&ndash;&gt;-->
+    <!--<batch:job id="job1">-->
+        <!--<batch:step id="main">-->
+            <!--<batch:partition step="step1" partitioner="partitioner">-->
+                <!--<batch:handler grid-size="4" task-executor="taskExecutor"/>-->
+            <!--</batch:partition>-->
+        <!--</batch:step>-->
+    <!--</batch:job>-->
+    <!--<batch:step id="step1">-->
+        <!--<batch:tasklet>-->
+            <!--<batch:chunk reader="productItemReader" writer="productItemWriter"-->
+                         <!--commit-interval="1"/>-->
+        <!--</batch:tasklet>-->
+    <!--</batch:step>-->
+
+    <!--<bean id="partitioner"-->
+          <!--class="org.springframework.batch.core.partition.support.MultiResourcePartitioner">-->
+        <!--<property name="resources" value="classpath:/product_csv/1*.csv"/>-->
+    <!--</bean>-->
+
+    <bean id="taskExecutor" class="org.springframework.core.task.SimpleAsyncTaskExecutor"/>
+</beans>
