@@ -17,12 +17,25 @@ public class ProductDaoImpl implements ProductDao {
     private Map<String, Product> storage = new HashMap<String, Product>();
 
     // Dao이지만 단순화 하기 위해 RDB에는 액세스 하지 않음
+    /**
+     * @Cacheable : 캐시를 적용함
+     *
+     * @param name
+     * @return
+     */
     @Cacheable(value = "area")
     public Product findProduct(String name) {
         slowly(); // 고의로 지연시킴
         return storage.get(name);
     }
 
+    /**
+     * value : 캐싱 이름
+     * key : 인자의 프로퍼티
+     * @CacheEvict : 키에 해당하는 캐시가 있으면 삭제하고 데이터를 읽어들이면 캐싱함
+     *
+     * @param product
+     */
     //@CacheEvict(value = "product", allEntries = true) 모든 캐시 엔트리 삭제
     @CacheEvict(value = "area", key = "#product.name")
     public void addProduct(Product product) {
