@@ -24,6 +24,7 @@
         <module>ch08/jpa</module>
         <module>ch08/mybatis</module>
         <module>ch09/cache</module>
+        <module>ch09/simple-spring-memcached</module>
         <module>ch10/batch-entry</module>
         <module>ch10/batch-basic</module>
         <module>ch10/batch-advanced</module>
