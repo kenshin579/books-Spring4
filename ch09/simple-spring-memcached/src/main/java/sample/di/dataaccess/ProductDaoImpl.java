@@ -1,11 +1,7 @@
 package sample.di.dataaccess;
 
-import com.google.code.ssm.api.InvalidateAssignCache;
 import com.google.code.ssm.api.ParameterValueKeyProvider;
 import com.google.code.ssm.api.ReadThroughSingleCache;
-import com.google.code.ssm.api.UpdateAssignCache;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 import sample.di.business.domain.Product;
 import sample.di.business.service.ProductDao;
@@ -27,13 +23,13 @@ public class ProductDaoImpl implements ProductDao {
      * @Cacheable : 캐시를 적용함
      */
 //    @Cacheable(value = "area")
-//    @ReadThroughSingleCache(namespace = "area")
+    @ReadThroughSingleCache(namespace = "area")
     public Product findProduct(@ParameterValueKeyProvider String name) {
         slowly(); // 고의로 지연시킴
         return storage.get(name);
     }
 
-    @ReadThroughSingleCache(namespace = "area")
+    //    @ReadThroughSingleCache(namespace = "area")
     public int getPrice(@ParameterValueKeyProvider String name) {
         slowly(); // 고의로 지연시킴
         return storage.get(name).getPrice();

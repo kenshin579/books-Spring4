@@ -14,7 +14,7 @@
     <context:component-scan base-package="sample.di.business.*"/>
     <context:component-scan base-package="sample.di.dataaccess"/>
 
-    <!--<import resource="simplesm-context.xml"/>-->
+    <import resource="simplesm-context.xml"/>
     <aop:aspectj-autoproxy/>
 
     <bean name="defaultMemcachedClient" class="com.google.code.ssm.CacheFactory">

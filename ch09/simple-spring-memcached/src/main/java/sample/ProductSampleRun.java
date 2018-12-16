@@ -17,12 +17,12 @@ public class ProductSampleRun {
 
         String productName = "hoge";
         productService.addProduct(new Product(productName, 100));
-//        productService.findProduct(productName);
-//        productService.findProduct(productName);
+        productService.findProduct(productName);
+        productService.findProduct(productName);
 //        productService.findProduct(productName);
 
-        productService.getPrice(productName);
-        productService.findProduct(productName);
+//        productService.getPrice(productName);
+//        productService.findProduct(productName);
 
 //        productService.addProduct(new Product(productName, 200));
 //        productService.findProduct(productName);
