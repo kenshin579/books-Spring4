@@ -1,5 +1,7 @@
 package sample.di.business.domain;
 
+import com.google.code.ssm.api.CacheKeyMethod;
+
 import java.io.Serializable;
 
 public class Product implements Serializable {
@@ -11,6 +13,7 @@ public class Product implements Serializable {
         this.price = price;
     }
 
+    @CacheKeyMethod
     public String getName() {
         return name;
     }

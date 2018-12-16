@@ -29,6 +29,21 @@ public class ProductServiceImpl implements ProductService {
         return product;
     }
 
+    public int getPrice(String name) {
+        // 측정 시작
+        StopWatch sw = new StopWatch();
+        sw.start();
+
+        int price = productDao.getPrice(name);
+
+        // 측정 종료
+        sw.stop();
+
+        System.out.format("Seconds=%1$s, value=%2$s%n",
+                sw.getTotalTimeSeconds(), price);
+        return price;
+    }
+
     public void addProduct(Product product) {
         log.debug("addProduct : Product : {}", product);
         productDao.addProduct(product);
