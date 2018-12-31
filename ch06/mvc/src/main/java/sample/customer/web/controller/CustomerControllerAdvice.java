@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import sample.customer.biz.service.DataNotFoundException;
 
 @Component
-@ControllerAdvice(annotations = Controller.class)
+@ControllerAdvice("sample.customer.web.controller")
 public class CustomerControllerAdvice {
 
     @InitBinder
